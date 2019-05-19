@@ -20,6 +20,9 @@ import (
 func main() {
 	panic("please don't use this unless you *really* know what you're doing.")
 
+	/* Print files to stdout */
+	log.SetOutput(os.Stdout)
+
 	var wg sync.WaitGroup
 	/* If we're using Windows, blow away files from all drives. */
 	if "windows" == runtime.GOOS {
