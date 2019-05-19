@@ -15,6 +15,10 @@ Usage
 -----
 Compile, put it on target, and run it.  There's no configuration whatsoever.
 
+It'll run happily without root (or Administrator) but only the files removable
+by the user as which it's running will be removed.  This can still be really
+bad so proceed with caution.
+
 Windows
 -------
 Files in lettered drives (e.g. `C:`) will be removed.  Network shares not
