@@ -17,5 +17,5 @@ Compile, put it on target, and run it.  There's no configuration whatsoever.
 
 Windows
 -------
-Files in lettered drives (i.e. `C:`) will be removed.  Network shares not
+Files in lettered drives (e.g. `C:`) will be removed.  Network shares not
 mounted with a drive letter won't be touched.
